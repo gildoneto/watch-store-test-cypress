@@ -6,16 +6,16 @@ import { Factory } from 'miragejs';
 /*
  * Faker Github repository: https://github.com/Marak/Faker.js#readme
  */
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 import { randomNumber } from './utils';
 
 export default {
   user: Factory.extend({
     name() {
-      return faker.fake('{{name.findName}}');
+      return faker.name.fullName();
     },
     mobile() {
-      return faker.fake('{{phone.phoneNumber}}');
+      return faker.phone.number();
     },
     afterCreate(user, server) {
       const messages = server.createList('message', randomNumber(10), { user });

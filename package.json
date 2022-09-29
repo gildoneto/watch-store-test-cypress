@@ -26,6 +26,7 @@
     "nuxt": "^2.14.5"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/tailwindcss": "^3.0.2",
@@ -37,7 +38,6 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "faker": "^6.6.6",
     "husky": "^4.3.0",
     "jest": "^26.4.2",
     "lint-staged": "^10.3.0",
