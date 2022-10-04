@@ -102,4 +102,35 @@ describe('ProductList - integration', () => {
     expect(wrapper.vm.searchTerm).toEqual('relógio');
     expect(cards).toHaveLength(2);
   });
+  it('should unfilter the product list when the input search is cleared', async () => {
+    // ARRANGE
+    const products = [
+      ...server.createList('product', 10),
+      server.create('product', {
+        title: 'Meu relógio amado',
+      }),
+    ];
+
+    axios.get.mockReturnValue(Promise.resolve({ data: { products } }));
+
+    const wrapper = mount(ProductList, {
+      mocks: {
+        $axios: axios,
+      },
+    });
+
+    await Vue.nextTick();
+
+    // ACT
+    const search = wrapper.findComponent(Search);
+    search.find('input[type="search"]').setValue('relógio');
+    await search.find('form').trigger('submit');
+    search.find('input[type="search"]').setValue('');
+    await search.find('form').trigger('submit');
+
+    // ASSERT
+    const cards = wrapper.findAllComponents(ProductCard);
+    expect(wrapper.vm.searchTerm).toEqual('');
+    expect(cards).toHaveLength(11);
+  });
 });
