@@ -42,4 +42,43 @@ describe('CartItem', () => {
     expect(content).toContain(title);
     expect(content).toContain(price);
   });
+
+  it('should display quantity 1 when product is first displayed', () => {
+    const { wrapper } = mountCartItem();
+    const quantity = wrapper.find('[data-testid="quantity"]');
+
+    expect(quantity.text()).toContain(1);
+  });
+
+  it('should increase quantity when + button gets clicked', async () => {
+    const { wrapper } = mountCartItem();
+    const quantity = wrapper.find('[data-testid="quantity"]');
+    const button = wrapper.find('[data-testid="+"]');
+
+    await button.trigger('click');
+    expect(quantity.text()).toContain('2');
+    await button.trigger('click');
+    expect(quantity.text()).toContain('3');
+    await button.trigger('click');
+    expect(quantity.text()).toContain('4');
+  });
+
+  it('should decrease quantity when - button gets clicked', async () => {
+    const { wrapper } = mountCartItem();
+    const quantity = wrapper.find('[data-testid="quantity"]');
+    const button = wrapper.find('[data-testid="-"]');
+
+    await button.trigger('click');
+    expect(quantity.text()).toContain('0');
+  });
+
+  it('should not go below zero when button - is repeatedly clicked', async () => {
+    const { wrapper } = mountCartItem();
+    const quantity = wrapper.find('[data-testid="quantity"]');
+    const button = wrapper.find('[data-testid="-"]');
+
+    await button.trigger('click');
+    await button.trigger('click');
+    expect(quantity.text()).toContain('0');
+  });
 });
