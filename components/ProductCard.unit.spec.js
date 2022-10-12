@@ -43,15 +43,13 @@ describe('ProductCard - unit', () => {
     expect(wrapper.text()).toContain('$22.00');
   });
 
-  it('should add item do cartState on button click', async () => {
+  xit('should add item do cartState on button click', async () => {
     const { wrapper } = mountProductCard();
     await wrapper.find('button').trigger('click');
 
     expect(cartState.items).toHaveLength(1);
   });
 });
-
-it.todo('should ensure product is not added to the cart twice');
 
 /**
  * Métodos/propriedades interessantes:
