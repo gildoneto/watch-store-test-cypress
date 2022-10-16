@@ -42,7 +42,7 @@ context('Store', () => {
       cy.getByTestId('shopping-cart').should('have.class', 'hidden');
     });
 
-    it.only('should NOT display "Clear cart" button when cart is empty', () => {
+    it('should NOT display "Clear cart" button when cart is empty', () => {
       cy.getByTestId('toggle-button').as('openCart');
       cy.get('@openCart').click();
 
@@ -82,6 +82,38 @@ context('Store', () => {
       cy.addToCart({ indexes: 'all' });
       cy.getByTestId('toggle-button').click();
       cy.getByTestId('cart-item').should('have.length', quantity);
+    });
+
+    it('should display quantity 1 when product is added to cart', () => {
+      cy.addToCart({ index: 1 });
+      cy.getByTestId('toggle-button').click();
+      cy.getByTestId('quantity').contains(1);
+    });
+    it('should increase quantity when button + gets clicked', () => {
+      cy.addToCart({ index: 1 });
+      cy.getByTestId('toggle-button').click();
+      cy.getByTestId('+').click();
+      cy.getByTestId('quantity').contains(2);
+      cy.getByTestId('+').click();
+      cy.getByTestId('quantity').contains(3);
+    });
+    it('should decrease quantity when button - gets clicked', () => {
+      cy.addToCart({ index: 1 });
+      cy.getByTestId('toggle-button').click();
+      cy.getByTestId('+').click();
+      cy.getByTestId('+').click();
+      cy.getByTestId('quantity').contains(3);
+      cy.getByTestId('-').click();
+      cy.getByTestId('quantity').contains(2);
+      cy.getByTestId('-').click();
+      cy.getByTestId('quantity').contains(1);
+    });
+    it('should NOT decrease below zero when button - gets clicked', () => {
+      cy.addToCart({ index: 1 });
+      cy.getByTestId('toggle-button').click();
+      cy.getByTestId('-').click();
+      cy.getByTestId('-').click();
+      cy.getByTestId('quantity').contains(0);
     });
 
     it('should remove a product from cart', () => {
