@@ -23,20 +23,44 @@ context('Store', () => {
   });
 
   context('Store > Shopping cart', () => {
-    it('should NOT display shopping cart when page first loads', () => {
+    beforeEach(() => {
+      server.createList('product', 10);
       cy.visit('/');
-
+    });
+    it('should NOT display shopping cart when page first loads', () => {
       cy.getByTestId('shopping-cart').should('have.class', 'hidden');
     });
 
     it('should toggle shopping cart visibility when button is clicked', () => {
-      cy.visit('/');
       cy.getByTestId('toggle-button').as('toggleButton');
       cy.getByTestId('close-button').as('closeButton');
       cy.get('@toggleButton').click();
       cy.getByTestId('shopping-cart').should('not.have.class', 'hidden');
       cy.get('@closeButton').click();
       cy.getByTestId('shopping-cart').should('have.class', 'hidden');
+    });
+
+    it('should open shopping cart when product is added', () => {
+      cy.getByTestId('product-card').first().find('button').click();
+      cy.getByTestId('shopping-cart').should('not.have.class', 'hidden');
+    });
+
+    it('should add first product to the cart', () => {
+      cy.getByTestId('product-card').first().find('button').click();
+      cy.getByTestId('cart-item').should('have.length', 1);
+    });
+
+    it.only('should add 3 products to the cart', () => {
+      cy.getByTestId('product-card').eq(1).find('button').click();
+      cy.getByTestId('product-card')
+        .eq(3)
+        .find('button')
+        .click({ force: true });
+      cy.getByTestId('product-card')
+        .eq(5)
+        .find('button')
+        .click({ force: true });
+      cy.getByTestId('cart-item').should('have.length', 3);
     });
   });
 
