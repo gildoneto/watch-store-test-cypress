@@ -51,15 +51,12 @@ context('Store', () => {
     });
 
     it.only('should add 3 products to the cart', () => {
+      cy.getByTestId('close-button').as('closeButton');
       cy.getByTestId('product-card').eq(1).find('button').click();
-      cy.getByTestId('product-card')
-        .eq(3)
-        .find('button')
-        .click({ force: true });
-      cy.getByTestId('product-card')
-        .eq(5)
-        .find('button')
-        .click({ force: true });
+      cy.get('@closeButton').click();
+      cy.getByTestId('product-card').eq(3).find('button').click();
+      cy.get('@closeButton').click();
+      cy.getByTestId('product-card').eq(5).find('button').click();
       cy.getByTestId('cart-item').should('have.length', 3);
     });
   });
