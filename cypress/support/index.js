@@ -1,3 +1,5 @@
+import './commands';
+
 Cypress.on('window:before:load', (win) => {
   win.handleFromCypress = function (request) {
     return fetch(request.url, {
@@ -5,7 +7,9 @@ Cypress.on('window:before:load', (win) => {
       headers: request.requestHeaders,
       body: request.requestBody,
     }).then((res) => {
-      let content = res.headers.get('content-type').includes('application/json')
+      const content = res.headers
+        .get('content-type')
+        .includes('application/json')
         ? res.json()
         : res.text();
       return new Promise((resolve) => {
