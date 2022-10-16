@@ -11,9 +11,9 @@ Cypress.Commands.add('addToCart', (mode) => {
     cy.get('@closeButton').click();
   };
 
-  const addByIndex = () => click(mode);
+  const addByIndex = () => click(mode.index);
   const addByIndexes = () => {
-    for (const index of mode) {
+    for (const index of mode.indexes) {
       click(index);
     }
   };
@@ -27,11 +27,11 @@ Cypress.Commands.add('addToCart', (mode) => {
     });
   };
 
-  if (Array.isArray(mode)) {
+  if (!!mode.indexes && Array.isArray(mode.indexes)) {
     addByIndexes();
-  } else if (typeof mode === 'number') {
+  } else if (mode.index) {
     addByIndex();
-  } else if (typeof mode === 'string' && mode === 'all') {
+  } else if (!!mode.indexes && mode.indexes === 'all') {
     addAll();
   } else {
     throw new Error(
