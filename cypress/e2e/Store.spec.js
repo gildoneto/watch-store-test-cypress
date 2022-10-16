@@ -26,41 +26,38 @@ context('Store', () => {
     it('should NOT display shopping cart when page first loads', () => {
       cy.visit('/');
 
-      cy.get('[data-testid="shopping-cart"]').should('have.class', 'hidden');
+      cy.getByTestId('shopping-cart').should('have.class', 'hidden');
     });
 
     it('should toggle shopping cart visibility when button is clicked', () => {
       cy.visit('/');
-      cy.get('[data-testid="toggle-button"]').as('toggleButton');
-      cy.get('[data-testid="close-button"]').as('closeButton');
+      cy.getByTestId('toggle-button').as('toggleButton');
+      cy.getByTestId('close-button').as('closeButton');
       cy.get('@toggleButton').click();
-      cy.get('[data-testid="shopping-cart"]').should(
-        'not.have.class',
-        'hidden'
-      );
+      cy.getByTestId('shopping-cart').should('not.have.class', 'hidden');
       cy.get('@closeButton').click();
-      cy.get('[data-testid="shopping-cart"]').should('have.class', 'hidden');
+      cy.getByTestId('shopping-cart').should('have.class', 'hidden');
     });
   });
 
   context('Store > Product List', () => {
     it('should display "0 Products" when no product is returned', () => {
       cy.visit('/');
-      cy.get('[data-testid="product-card"]').should('have.length', 0);
+      cy.getByTestId('product-card').should('have.length', 0);
       cy.get('body').contains('0 Products');
     });
     it('should display "1 Product" when 1 product is returned', () => {
       cy.visit('/');
       server.create('product');
 
-      cy.get('[data-testid="product-card"]').should('have.length', 1);
+      cy.getByTestId('product-card').should('have.length', 1);
       cy.get('body').contains('1 Product');
     });
     it('should display "10 Products" when 10 products are returned', () => {
       cy.visit('/');
       server.createList('product', 10);
 
-      cy.get('[data-testid="product-card"]').should('have.length', 10);
+      cy.getByTestId('product-card').should('have.length', 10);
       cy.get('body').contains('10 Products');
     });
   });
@@ -82,8 +79,8 @@ context('Store', () => {
 
       cy.visit('/');
       cy.get('input[type="search"]').type(PRODUCT_TITLE);
-      cy.get('[data-testid="search-form"]').submit();
-      cy.get('[data-testid="product-card"]').should('have.length', 1);
+      cy.getByTestId('search-form').submit();
+      cy.getByTestId('product-card').should('have.length', 1);
     });
 
     it('should NOT return any product', () => {
@@ -91,8 +88,8 @@ context('Store', () => {
 
       cy.visit('/');
       cy.get('input[type="search"]').type(PRODUCT_TITLE);
-      cy.get('[data-testid="search-form"]').submit();
-      cy.get('[data-testid="product-card"]').should('have.length', 0);
+      cy.getByTestId('search-form').submit();
+      cy.getByTestId('product-card').should('have.length', 0);
       cy.get('body').contains('0 Products');
     });
   });
