@@ -40,6 +40,18 @@ describe('Cart', () => {
     expect(wrapper.vm).toBeDefined();
   });
 
+  it('should NOT display empty card when there are no products', () => {
+    const { cartManager } = mountCart();
+
+    const wrapper = mount(Cart, {
+      mocks: {
+        $cart: cartManager,
+      },
+    });
+    expect(wrapper.find('[data-testid="clear-cart-buton"]').exists()).toBe(
+      false
+    );
+  });
   it('should emit close event when button gets clicked', async () => {
     const { wrapper } = mountCart();
     const button = wrapper.find('[data-testid="close-button"]');
