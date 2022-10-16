@@ -23,8 +23,10 @@ context('Store', () => {
   });
 
   context('Store > Shopping cart', () => {
+    const quantity = 10;
+
     beforeEach(() => {
-      server.createList('product', 10);
+      server.createList('product', quantity);
       cy.visit('/');
     });
     it('should NOT display shopping cart when page first loads', () => {
@@ -50,14 +52,22 @@ context('Store', () => {
       cy.getByTestId('cart-item').should('have.length', 1);
     });
 
-    it.only('should add 3 products to the cart', () => {
-      cy.getByTestId('close-button').as('closeButton');
-      cy.getByTestId('product-card').eq(1).find('button').click();
-      cy.get('@closeButton').click();
-      cy.getByTestId('product-card').eq(3).find('button').click();
-      cy.get('@closeButton').click();
-      cy.getByTestId('product-card').eq(5).find('button').click();
+    it('should add 3 products to the cart', () => {
+      cy.addToCart([1, 3, 5]);
+      cy.getByTestId('toggle-button').click();
       cy.getByTestId('cart-item').should('have.length', 3);
+    });
+
+    it('should add 1 product to the cart', () => {
+      cy.addToCart(6);
+      cy.getByTestId('toggle-button').click();
+      cy.getByTestId('cart-item').should('have.length', 1);
+    });
+
+    it('should add all products to the cart', () => {
+      cy.addToCart('all');
+      cy.getByTestId('toggle-button').click();
+      cy.getByTestId('cart-item').should('have.length', quantity);
     });
   });
 
