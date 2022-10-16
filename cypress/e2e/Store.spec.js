@@ -29,15 +29,16 @@ context('Store', () => {
       cy.get('[data-testid="shopping-cart"]').should('have.class', 'hidden');
     });
 
-    it.only('should toggle shopping cart visibility when button is clicked', () => {
+    it('should toggle shopping cart visibility when button is clicked', () => {
       cy.visit('/');
       cy.get('[data-testid="toggle-button"]').as('toggleButton');
+      cy.get('[data-testid="close-button"]').as('closeButton');
       cy.get('@toggleButton').click();
       cy.get('[data-testid="shopping-cart"]').should(
         'not.have.class',
         'hidden'
       );
-      cy.get('@toggleButton').click({ force: true });
+      cy.get('@closeButton').click();
       cy.get('[data-testid="shopping-cart"]').should('have.class', 'hidden');
     });
   });
