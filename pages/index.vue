@@ -49,7 +49,7 @@ export default {
       const {
         list: { length },
       } = this;
-      return length === 1 ? `${length} Product` : `${length} Products`;
+      return length === 1 ? `${length} Produto` : `${length} Produtos`;
     },
   },
   async created() {

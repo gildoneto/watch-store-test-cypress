@@ -134,13 +134,13 @@ describe('ProductList - integration', () => {
     const { wrapper } = await mountProductList(27);
     const label = wrapper.find('[data-testid="total-quantity-label"]');
 
-    expect(label.text()).toEqual('27 Products');
+    expect(label.text()).toEqual('27 Produtos');
   });
 
   it('should display product (singular) when there is only 1 product', async () => {
     const { wrapper } = await mountProductList(1);
     const label = wrapper.find('[data-testid="total-quantity-label"]');
 
-    expect(label.text()).toEqual('1 Product');
+    expect(label.text()).toEqual('1 Produto');
   });
 });
