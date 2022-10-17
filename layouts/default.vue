@@ -23,12 +23,16 @@
                 fill="currentColor"
               />
             </svg>
-            <span class="mx-1 text-sm">NY</span>
+            <span class="mx-1 text-sm">REC - BR</span>
           </div>
           <div
             class="w-full text-gray-700 md:text-center text-2xl font-semibold"
           >
-            Brand
+            <img
+              src="https://i0.wp.com/watch-store.co.uk/wp-content/uploads/2021/03/cropped-1100x360-1.png?fit=1100%2C359&ssl=1"
+              alt="Logo"
+              width="500"
+            />
           </div>
           <div class="flex items-center justify-end w-full">
             <button
@@ -77,22 +81,22 @@
             <a
               class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
               href="#"
-              >Shop</a
+              >Loja</a
             >
             <a
               class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
               href="#"
-              >Categories</a
+              >Categorias</a
             >
             <a
               class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
               href="#"
-              >Contact</a
+              >Contato</a
             >
             <a
               class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
               href="#"
-              >About</a
+              >Sobre</a
             >
           </div>
         </nav>
@@ -109,9 +113,13 @@
         class="container mx-auto px-6 py-3 flex justify-between items-center"
       >
         <a href="#" class="text-xl font-bold text-gray-500 hover:text-gray-400"
-          >Brand</a
+          >Ir para o topo</a
         >
-        <p class="py-2 text-gray-500 sm:py-0">All rights reserved</p>
+        <p class="py-2 text-gray-500 sm:py-0">
+          Criado por <a href="https://github.com/gildoneto">@gildoneto</a> no
+          curso de testes do
+          <a href="https://javascript.tv.br/">@Vedovelli</a>
+        </p>
       </div>
     </footer>
   </div>
