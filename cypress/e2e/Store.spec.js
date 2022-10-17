@@ -139,24 +139,24 @@ context('Store', () => {
   });
 
   context('Store > Product List', () => {
-    it('should display "0 Products" when no product is returned', () => {
+    it('should display "0 Produtos" when no product is returned', () => {
       cy.visit('/');
       cy.getByTestId('product-card').should('have.length', 0);
-      cy.get('body').contains('0 Products');
+      cy.get('body').contains('0 Produtos');
     });
-    it('should display "1 Product" when 1 product is returned', () => {
+    it('should display "1 Produto" when 1 product is returned', () => {
       cy.visit('/');
       server.create('product');
 
       cy.getByTestId('product-card').should('have.length', 1);
-      cy.get('body').contains('1 Product');
+      cy.get('body').contains('1 Produto');
     });
-    it('should display "10 Products" when 10 products are returned', () => {
+    it('should display "10 Produtos" when 10 products are returned', () => {
       cy.visit('/');
       server.createList('product', 10);
 
       cy.getByTestId('product-card').should('have.length', 10);
-      cy.get('body').contains('10 Products');
+      cy.get('body').contains('10 Produtos');
     });
   });
 
@@ -188,7 +188,7 @@ context('Store', () => {
       cy.get('input[type="search"]').type(PRODUCT_TITLE);
       cy.getByTestId('search-form').submit();
       cy.getByTestId('product-card').should('have.length', 0);
-      cy.get('body').contains('0 Products');
+      cy.get('body').contains('0 Produtos');
     });
   });
 });
